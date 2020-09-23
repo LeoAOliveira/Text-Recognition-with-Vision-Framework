@@ -9,8 +9,11 @@ import UIKit
 
 internal class ViewController: UIViewController {
     
+    private var textRecognition = TextRecognition()
+    
     private lazy var delegate = ImagePickerDelegate { (image) in
         self.selectedPhotoImageView.image = image
+        self.executeTextRecognition(image: image)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -56,6 +59,14 @@ internal class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+    }
+    
+    private func executeTextRecognition(image: UIImage?) {
+        guard let imageVision = image else { return }
+        
+        let results = textRecognition.imageRequest(toImage: imageVision)
+        
+        digitalizationTextView.text = results
     }
     
     private func showImagePickerControllerAction() {

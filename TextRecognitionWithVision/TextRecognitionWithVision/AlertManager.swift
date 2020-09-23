@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlertManager {
+internal class AlertManager {
 
     /**
      An action sheet alert with title messages is created.
