@@ -9,9 +9,16 @@ import UIKit
 
 internal class ImagePickerDelegate: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    private var selectedImage: ((UIImage?) -> Void)?
+    
+    init(_ selectedImage: @escaping (UIImage?) -> Void) {
+        self.selectedImage = selectedImage
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-            fatalError("Image wasn't returned")
+            return
         }
+        selectedImage?(originalImage)
     }
 }

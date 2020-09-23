@@ -9,20 +9,27 @@ import UIKit
 
 internal class ViewController: UIViewController {
     
-    private var delegate = ImagePickerDelegate()
+    private lazy var delegate = ImagePickerDelegate { (image) in
+        self.selectedPhotoImageView.image = image
+        self.dismiss(animated: true, completion: nil)
+    }
     
     private lazy var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = delegate
-        imagePicker.sourceType = .camera
+        
+        #warning("Defining image picker 'sourceType' as '.camera' will cause error when running in the simulator. Comment the line below while testing.")
+        // imagePicker.sourceType = .camera
         imagePicker.sourceType = .photoLibrary
+        
         return imagePicker
     }()
     
     private lazy var selectedPhotoImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .blue
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .systemGray
         self.view.addSubview(imageView)
         return imageView
     }()
