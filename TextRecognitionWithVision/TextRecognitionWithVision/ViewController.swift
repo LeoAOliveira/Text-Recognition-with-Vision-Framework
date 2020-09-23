@@ -46,7 +46,7 @@ internal class ViewController: UIViewController {
     private lazy var selectPhotoButton: UIButton = {
         let photoButton = UIButton(frame: .zero)
         photoButton.translatesAutoresizingMaskIntoConstraints = false
-        photoButton.setTitle("Select photo", for: .normal)
+        photoButton.setTitle("Selecione uma foto", for: .normal)
         photoButton.backgroundColor = .red
         photoButton.addTarget(self, action: #selector(selectPhotoAction), for: .touchUpInside)
         self.view.addSubview(photoButton)
@@ -58,13 +58,26 @@ internal class ViewController: UIViewController {
         view.backgroundColor = .white
     }
     
-    
+    private func showImagePickerControllerAction() {
+        let photoLibraryAction = UIAlertAction(title: "Fotos e Vídeos", style: .default) { (action) in
+            self.imagePickerController.sourceType = .photoLibrary
+            self.present(self.imagePickerController, animated: true, completion: nil)
+        }
+        
+        let cameraAction = UIAlertAction(title: "Câmera", style: .default) { (action) in
+            self.imagePickerController.sourceType = .camera
+            self.present(self.imagePickerController, animated: true, completion: nil)
+        }
+        
+        AlertManager.createMultipleActionsAlert(on: self, title: "Escolha a sua imagem", message: "Dica: você pode transformar imagens em texto.", actions: [photoLibraryAction, cameraAction])
+    }
+
     /**
     Select image from photo library
     */
     @objc func selectPhotoAction() {
         
-        present(imagePickerController, animated: true, completion: nil)
+        showImagePickerControllerAction()
     }
     
     override func viewDidLayoutSubviews() {
