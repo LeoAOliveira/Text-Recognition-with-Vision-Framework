@@ -21,7 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app load images from your photo library</string>
+	<string>This app loads images from your photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app loads images from your camera</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

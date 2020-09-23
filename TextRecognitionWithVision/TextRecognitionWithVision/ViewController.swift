@@ -9,6 +9,16 @@ import UIKit
 
 internal class ViewController: UIViewController {
     
+    private var delegate = ImagePickerDelegate()
+    
+    private lazy var imagePickerController: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = delegate
+        imagePicker.sourceType = .camera
+        imagePicker.sourceType = .photoLibrary
+        return imagePicker
+    }()
+    
     private lazy var selectedPhotoImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +41,7 @@ internal class ViewController: UIViewController {
         photoButton.translatesAutoresizingMaskIntoConstraints = false
         photoButton.setTitle("Select photo", for: .normal)
         photoButton.backgroundColor = .red
+        photoButton.addTarget(self, action: #selector(selectPhotoAction), for: .touchUpInside)
         self.view.addSubview(photoButton)
         return photoButton
     }()
@@ -38,6 +49,15 @@ internal class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+    }
+    
+    
+    /**
+    Select image from photo library
+    */
+    @objc func selectPhotoAction() {
+        
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
