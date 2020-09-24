@@ -43,7 +43,7 @@ internal class TextRecognition {
     }
     
     /**
-     
+     With the requestHandler that was executed in the function imageRequest, this function executes the textRecognitionRequest. If it does not work, it will return the error with the localize description.
      */
     func performOCRRequest() {
         do {
