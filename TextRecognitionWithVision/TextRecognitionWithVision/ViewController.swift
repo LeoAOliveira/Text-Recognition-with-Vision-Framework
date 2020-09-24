@@ -73,6 +73,9 @@ internal class ViewController: UIViewController {
         digitalizationTextView.text = results
     }
     
+    /**
+     In this function, we create the alert that will appear when the user requests to upload an image.
+     */
     private func showImagePickerControllerAction() {
         let photoLibraryAction = UIAlertAction(title: "Fotos e Vídeos", style: .default) { (action) in
             self.imagePickerController.sourceType = .photoLibrary
@@ -88,13 +91,16 @@ internal class ViewController: UIViewController {
     }
 
     /**
-    Select image from photo library
+    Select image from photo library.
     */
     @objc func selectPhotoAction() {
         
         showImagePickerControllerAction()
     }
     
+    /**
+     Creates the constraints.
+     */
     override func viewDidLayoutSubviews() {
         
         NSLayoutConstraint.activate([
