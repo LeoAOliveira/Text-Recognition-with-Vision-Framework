@@ -61,6 +61,10 @@ internal class ViewController: UIViewController {
         view.backgroundColor = .white
     }
     
+    /**
+     Executes the function in the TextRecognition class that will recognize the text inside the image being analized. The result is displayed in our text view.
+     - Parameter image: Our UIImage with text.
+     */
     private func executeTextRecognition(image: UIImage?) {
         guard let imageVision = image else { return }
         
