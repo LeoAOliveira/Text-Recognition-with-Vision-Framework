@@ -18,13 +18,14 @@ internal class TextRecognition {
     private lazy var textRecognitionRequest: VNRecognizeTextRequest = {
         let textRecognition = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
         textRecognition.recognitionLanguages = ["pt-BR", "en-US"]
+        textRecognition.usesLanguageCorrection = true
         textRecognition.recognitionLevel = .accurate
         textRecognition.usesCPUOnly = true
         return textRecognition
     }()
     
     func imageRequest(toImage image: UIImage) -> String {
-        if let ciImage = image.ciImage {
+        if let ciImage = CIImage(image: image) {
             requestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
             
             performOCRRequest()
@@ -56,7 +57,7 @@ internal class TextRecognition {
             var transcript: String = ""
             for observation in results {
                 transcript.append(observation.topCandidates(1)[0].string)
-                transcript.append("\n")
+                transcript.append(" ")
             }
             resultTextRecognition = transcript
         }
